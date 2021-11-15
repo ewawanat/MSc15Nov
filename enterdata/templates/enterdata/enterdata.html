@@ -1,0 +1,26 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1>
+<!-- the loop below will probably not be needed in the end as we may end up not using names displayed  
+ {% for species in species %}
+    <h4><a href = "#"> {{ species.name }} </a> </h4>
+ {% endfor %}
+-->
+ <div class = "enter-data">
+   <form class = "site-form" method ="post" enctype= "multipart/form-data">
+      {% csrf_token %} <!--security measure token-->
+      {{form.as_p}}
+      <input type = "submit" name="" value= "Submit my data" href="submitted.html"/>
+   </form>
+</h1>
+
+<h2>
+<a href={% url 'displaydata:displaydata' %}>Show me some data! </a>
+</h2>
+
+{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    {% endcomment %}
+</script>
+{% endblock %}
