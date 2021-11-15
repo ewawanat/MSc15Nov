@@ -29,7 +29,9 @@ def submitted(request):
 
 # AJAX
 def load_counties(request):
+    print("we are here!")
     country_id = request.GET.get('country_id')
-    counties = County.objects.filter(country_id=country_id)
+    print(country_id) 
+    counties = County.objects.filter(in_country_id=country_id).all()
     return render(request, 'enterdata/county_dropdown_list_options.html', {'counties': counties})
     # return JsonResponse(list(counties.values('id', 'name')), safe=False)

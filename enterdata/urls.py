@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.enterdata, name = 'enterdata'),
     path('submitted', views.submitted, name = 'submitted'),
 
-    path('ajax/load-counties/', views.load_counties, name ='ajax_load_counties')
+    path('load_counties', views.load_counties, name ='ajax_load_counties')
 ]

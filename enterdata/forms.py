@@ -16,11 +16,11 @@ class EnterData(forms.ModelForm):
         super().__init__(* args, **krwargs)
         self.fields['in_county'].queryset = models.County.objects.none()
         
-        if 'in_country' in self.data:
+        if 'country_id' in self.data:
             try:
-                country_id = int(self.data.get('in_country'))
+                country_id = int(self.data.get('country_id'))
                 self.fields['city'].queryset = models.County.objects.filter(country_id=country_id).order_by('name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
+            except (ValueError, TypeError) as e:
+                print("this is the error ",  e)  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
             self.fields['in_county'].queryset = self.instance.country.county_set.order_by('name')
