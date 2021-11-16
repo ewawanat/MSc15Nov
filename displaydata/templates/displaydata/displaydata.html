@@ -3,13 +3,15 @@
  <title> See some data! </title>
  </head>
  <body>
- <h1> What data would you like to see today?</h1>
+ <h1> What data would you like to see today, {{ user.username }}?</h1>
  <div class = "display-data">
+   <h1>
    <form class = "site-form" action = "{% url 'displaydata:displaydata' %}" method ="post" enctype= "multipart/form-data"> <!--add action here-->
       {% csrf_token %} <!--security measure token-->
       {{form.as_p}}
       <input type = "submit" name="" value= "Show me some data"/>
    </form>
+   </h1>
 </h1>
 {% comment %} {%if jsondata %}
    {{jsondata}}
@@ -20,7 +22,7 @@
             <rect></rect>
         </svg>
    </div> {% endcomment %}
-   <div id="d3-container">
+   <div id="d3-container" class = "d3container">
    </div>
     <script src = "https://d3js.org/d3.v5.js"></script>
     <script> 

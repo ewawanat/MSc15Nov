@@ -1,12 +1,3 @@
-{% extends 'base_layout.html' %}
-
-{% block content %}
-    <h1> Log in: </h1>
-    <form class = "site-form" id = "loginpage" action="{% url 'accounts:login' %}" method="post"> 
-        {% csrf_token %} <!-- token to send to the server when teh form is sent so that the server knows the data is coming form the application-->
-        {{ form }}
-        <input type="submit" id = "loginbutton" value = "Log in">
-    </form>
 
  <div class="birdcontainer">
         <!--Sun-->
@@ -84,5 +75,3 @@
         </section>
         <span class="grass"></span>
     </div>
-
-{% endblock %}
