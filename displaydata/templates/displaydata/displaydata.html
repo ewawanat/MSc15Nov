@@ -6,7 +6,7 @@
  <h1> What data would you like to see today, {{ user.username }}?</h1>
  <div class = "display-data">
    <h1>
-   <form class = "site-form" action = "{% url 'displaydata:displaydata' %}" method ="post" enctype= "multipart/form-data"> <!--add action here-->
+   <form class = "site-form" id = "displaydataform" data-counties-url = "{% url 'displaydata:ajax_load_counties' %}" action = "{% url 'displaydata:displaydata' %}" method ="post" enctype= "multipart/form-data"> <!--add action here-->
       {% csrf_token %} <!--security measure token-->
       {{form.as_p}}
       <input type = "submit" name="" value= "Show me some data"/>
@@ -87,4 +87,31 @@
       svg.node();
     
     </script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+   $("#id_in_country").change(function () {
+         const url = $("#displaydataform").attr("data-counties-url");  // get the url of the `load_counties` view
+         const countryId = $(this).val();  // get the selected country ID from the HTML input
+         console.log(url);
+         console.log(countryId);
+         $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /enterdata/ajax/load-cities/ )
+            data: {
+                'country_id': countryId       // add the country id to the GET parameters
+            },
+            success: function (data) {  
+               console.log(data);
+               var list = document.getElementById("id_in_county");
+               console.log(list);
+               list.innerHTML = ""; //clear all 
+               let html_data = '<option value="">---------</option>';
+               data.forEach(function (county) {
+                  console.log(county);
+                  html_data +=`<option value = "${county.name}"> ${county.name} </option>`
+               });
+               list.innerHTML = html_data; 
+            }
+        });
+   });
+</script>
 {% endblock %}

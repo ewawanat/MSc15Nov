@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from .models import County, Species
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.http.response import JsonResponse
 
 @login_required(login_url="/accounts/login/") #this is so that the user can only add data if they are logged in, if not logged in, redirect to login page
 def enterdata(request): 
@@ -29,9 +30,13 @@ def submitted(request):
 
 # AJAX
 def load_counties(request):
-    print("we are here!")
+    # print("we are here!")
     country_id = request.GET.get('country_id')
-    print(country_id) 
+    # print(country_id) 
     counties = County.objects.filter(in_country_id=country_id).all()
-    return render(request, 'enterdata/county_dropdown_list_options.html', {'counties': counties})
-    # return JsonResponse(list(counties.values('id', 'name')), safe=False)
+    # print(counties)
+    
+    # print(JsonResponse(list(counties.values('in_country', 'name')), safe=False))
+    return JsonResponse(list(counties.values('in_country', 'name')), safe=False)
+   # return render(request, 'enterdata/county_dropdown_list_options.html', {'counties': counties})
+

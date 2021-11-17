@@ -1,9 +1,0 @@
-{% extends 'base_layout.html' %}
-
-{% block content %}
-<option value = "">--Select a county---</option>
-{% for county in counties %}
-<option value ="{{ county.pk }}"> {{ county.name}}</option>
-{% endfor %}
-
-{% endblock %}
