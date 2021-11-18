@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 
 from enterdata.models import Country, County, Sighting, Species
 from . import forms
-from django.shortcuts import HttpResponse
 import json
 from django.http.response import JsonResponse
 
@@ -28,9 +27,9 @@ def displayData(request):
         from_date_selected = request.POST['from_date']
         to_date_selected = request.POST['to_date']
 
-        print( country_selected, county_selected, from_date_selected, to_date_selected)
+        print(country_selected, county_selected, from_date_selected, to_date_selected)
 
-      #  all_sightings = Sighting.objects.filter(species = species_selected) \
+      # all_sightings = Sighting.objects.filter(species = species_selected) \
 
         all_sightings = Sighting.objects.filter(species = species_selected).filter(in_country = country_selected) \
             .filter(in_county = county_selected)
@@ -68,6 +67,4 @@ def load_counties(request):
     counties = County.objects.filter(in_country_id=country_id).all()
     # print(counties)
     
-    # print(JsonResponse(list(counties.values('in_country', 'name')), safe=False))
     return JsonResponse(list(counties.values('in_country', 'name')), safe=False)
-   # return render(request, 'enterdata/county_dropdown_list_options.html', {'counties': counties})
