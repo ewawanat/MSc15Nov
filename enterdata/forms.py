@@ -12,5 +12,3 @@ class EnterData(forms.ModelForm):
         model = models.Sighting
         fields = ['species', 'date_seen', 'photo', 'in_country', 'in_county' ]
 
-    # def __init__(self, * args, **krwargs):
-    #     super().__init__(* args, **krwargs)

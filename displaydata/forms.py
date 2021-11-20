@@ -1,19 +1,27 @@
 from django import forms
+from django.db.models import query
+from django.forms import widgets
 
 from enterdata.models import County, Species
 from enterdata.views import enterdata
 from . import models
 
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-# class SpeciesMultipleChoiceForm(forms.Form):
-#     species_select = forms.ModelMultipleChoiceField(queryset=Species.objects.values_list('name'))
-    
+
+# class SelectMultipleSpecies(forms.ModelForm):
+#     species_name = forms.MultipleChoiceField(
+#         queryset = Species.objects.all(),
+#         widget= forms.CheckboxSelectMultiple
+#     )
+
+# SPECIES_CHOICES = Species.objects.all()
+
 class DisplayData(forms.ModelForm):
     from_date = forms.DateField(widget= DateInput)
     to_date = forms.DateField(widget= DateInput)
-    # species_name = forms.MultipleChoiceField(Species.objects.values('name'))
 
     class Meta:
         model = models.DisplayForm
