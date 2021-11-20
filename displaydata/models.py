@@ -17,7 +17,7 @@ class DisplayForm(models.Model):
    # MultiSelectField(Species, choices = SPECIES_CHOICES, on_delete=PROTECT)
     species_name = models.ManyToManyField(Species)
     in_country = models.ForeignKey(Country, on_delete=PROTECT)
-    in_county = models.ForeignKey(County, on_delete=PROTECT, blank=True)
+    in_county = models.ManyToManyField(County)
     from_date = models.DateField()
     to_date = models.DateField()
     birder = models.ForeignKey(User, on_delete=PROTECT, default=None)
