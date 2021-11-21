@@ -37,7 +37,7 @@ class Sighting(models.Model):
     date_seen = models.DateField(default=date.today)
     photo = models.ImageField(default ='default.png', blank = True)
     in_country = models.ForeignKey(Country, default = None, on_delete = PROTECT)
-    in_county = models.ForeignKey(County, default = None, on_delete = PROTECT)
+    in_county = models.ForeignKey(County, default = None, on_delete = CASCADE)
     #sound_file = models.FileField(upload_to=/'sounds/')
     #class Meta:
     # db_table='Audio_store'

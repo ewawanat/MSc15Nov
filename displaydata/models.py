@@ -16,7 +16,7 @@ class DisplayForm(models.Model):
    # species_name = models.ForeignKey(Species, on_delete=PROTECT)
    # MultiSelectField(Species, choices = SPECIES_CHOICES, on_delete=PROTECT)
     species_name = models.ManyToManyField(Species)
-    in_country = models.ForeignKey(Country, on_delete=PROTECT)
+    in_country = models.ManyToManyField(Country)
     in_county = models.ManyToManyField(County)
     from_date = models.DateField()
     to_date = models.DateField()
