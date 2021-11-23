@@ -1,0 +1,13 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<body>
+ <h1> Hi {{ user.username }}! <div> What type of species do you want to track? </div> </h1>
+   <h1>
+   <form class = "site-form" method = "post" action = "{% url 'enterdata:type' %}">
+      {% csrf_token %} <!--security measure token-->
+      <input type = "submit" name = "birddata" id="datachoice1" value = "birds"></input>
+      <input type = "submit" name = "mushroomdata" id="datachoice2" value = "mushrooms"></input>
+   </form> 
+   </h1>
+</body>
+{%endblock%}

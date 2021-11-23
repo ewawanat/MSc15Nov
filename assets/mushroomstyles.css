@@ -1,0 +1,242 @@
+body{
+    color: darkblue;
+}
+
+body *{
+    font-family: "Gill Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+    margin: 0;
+}
+
+header{
+    background-color: #6a6d79;
+    padding: 20px;
+    position: relative;
+    text-align: right;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+header h1 {
+    display: inline-flex;
+    text-align:justify;
+    margin-left: 20px;
+}
+nav {
+    justify-self: end;
+    padding-right: 40px;
+}
+
+nav li {
+    display: inline-flex;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 0;
+}
+
+nav button{
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    font-size: 1em;
+
+}
+.welcome-message {
+    color: midnightblue;
+}
+
+.site-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+#loginpage {
+    display: list-item;
+}
+
+#signup{ 
+    display: list-item;
+
+}
+#loginbutton { 
+    width:fit-content;
+    margin-left: auto;
+}
+
+input[signupbutton] { 
+    width:fit-content;
+    margin-left: auto;
+}
+
+input[type=submit] {
+    width: 30%;
+    height: 30%;
+    vertical-align: middle;
+}
+
+a, a:hover, a:visited{
+    color: darkblue;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: radial-gradient(at 76% 28%,#FFA100 -37%,#72FFF6 101%);
+    height: 100%;
+
+}
+
+
+
+/* .d3-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+
+
+/*Colors*/
+.grass {
+    background: #7ebc6f;
+}
+.rock {
+    background: #b1aaa4;
+}
+
+.head, .wings {
+    background: #11b197;
+}
+
+.container {
+    height: 510px;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    bottom: 0;
+}
+
+.container > .grass {
+    position: absolute;
+    bottom: 0;
+    height: 5px;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #67b65a;
+}
+#bird-wrapper {
+    height: 510px;
+    width: 765px;
+    position: absolute;
+    /* top: 0; */
+    left: 50%;
+    bottom: 0;
+    margin-left: -334px;
+}
+
+
+/*--- Sun ---*/
+#sun {
+    position: fixed;
+    right: 20%;
+    top: 20%;
+    height: 137px;
+    width: 137px;
+    background: #e86c48;
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 10px solid #efa588;
+    z-index: -1;
+}
+/*** Mushrooms Head ***/
+.mushroom-head {
+    margin: 0 auto;
+    width: 256px;
+    height: 100px;
+    background-color: red;
+    border-radius: 50%/100px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom: 25px solid red;
+    position: relative;
+  }
+  
+  @mixin circle($size, $color) {
+    background-color: $color;
+    border-radius: 50%;
+    height: $size;
+    width: $size;  
+  }
+  
+  @mixin position-abs($top, $left) {
+    position: absolute;
+    left: $left;
+    top: $top;
+  }
+  
+  .circle-tl{
+    @include circle(45px, white);
+    @include position-abs(20%, 28%);
+  }
+  
+  .circle-tr{
+    @include circle(25px, white);
+    @include position-abs(25%, 55%);
+  }
+  
+  .circle-mid{
+    @include circle(35px, white);
+    @include position-abs(70%, 43%);
+  }
+  
+  .circle-bl{
+    @include circle(40px, white);
+    @include position-abs(65%, 10%);
+  }
+  
+  .circle-br{
+    @include circle(55px, white);
+    @include position-abs(45%, 70%);
+  }
+  
+  
+  /*** Mushroom Body ***/
+  .mushroom-body_top {
+    margin: 10px auto 0px;
+      border-bottom: 75px solid black;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      height: 0;
+      width: 80px;
+  }
+  
+  .mushroom-body_bottom{
+    margin: 0 auto;
+    background-color: black;
+    height: 50px;
+    width: 100px;
+    border-radius: 0 0 100px 100px;
+  }
+  
+  
+  
+  
+  
+  
+  
