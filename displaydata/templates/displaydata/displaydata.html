@@ -12,23 +12,19 @@
    <form class = "site-form" id = "displaydataform" data-counties-url = "{% url 'displaydata:ajax_load_counties' %}" action = "{% url 'displaydata:displaydata' %}" method ="post" enctype= "multipart/form-data"> <!--add action here-->
       {% csrf_token %} <!--security measure token-->
       {{form.as_p}}
-      <input type = "submit" name="" value= "Show me some data"/>
+      <input type = "submit" name="bargraph" value = "Show me overall species numbers"/> 
+      <button type = "button" id = "linegraph" name="linegraph"> Show me change in species numbers over time </button> 
+
    </form>
    </h1>
 </h1>
-{% comment %} {%if jsondata %}
-   {{jsondata}}
-{% endif %} {% endcomment %}
-
-    {% comment %} <div class = "canvas">
-        <svg width = "600" height = "600">
-            <rect></rect>
-        </svg>
-   </div> {% endcomment %}
+<script> 
+</script>
    <div id="d3-container" class = "d3container">
    </div>
    
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+{% if jsondata %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 <script>
    $("#id_in_country").change(function () {
       console.log("we are here")
@@ -57,7 +53,7 @@
    });
 </script>
 
-{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+{% comment %} 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script>
@@ -69,7 +65,7 @@
    });
 
 </script> {% endcomment %}
-{% if jsondata %}
+
    <script src = "https://d3js.org/d3.v5.js"></script>
       <script> 
          var data = {{ jsondata | safe }};
@@ -134,5 +130,30 @@
          svg.node();
       
       </script>
-   {% endif %}
+
+   <script>
+   //to trigger line graph 
+   $(document).ready(function() {
+      $('#linegraph').click(function() {
+         console.log("button was pressed")
+         var formdata = {
+            species: $("#id_species_name").val(),
+            country:$("#id_in_country").val(),
+            county: $("#id_in_county").val(),
+            from_date: $("#id_from_date").val(),
+            to_date: $("#id_to_date").val(),
+          }
+         $.ajax({
+            type:'POST',
+            url:'',
+            data: formdata,
+            success: function(kwak){
+               console.log(kwak)
+            }
+         });
+      });
+   });
+   </script>
+
+{% endif %}
 {% endblock %}

@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from enterdata.models import Country, County, Sighting, Species
 from . import forms
 import json
-from django.http.response import JsonResponse
-
+from django.http.response import HttpResponse, JsonResponse
+import csv
 
 
 @login_required(login_url="/accounts/login/") #this is so that the user can only add data if they are logged in, if not logged in, redirect to login page
@@ -37,15 +37,35 @@ def displayData(request):
         list_dict = [  
         ] #make an array 
 
+        list_for_line_graph = [
+            ]
+            
         for each_species in selected_species:       # iterate over selected species
             result = Species.objects.get(id=each_species) # match the id with each of the species id
             all_sightings = Sighting.objects.filter(species = result) \
                 .filter(in_country__in = request.POST.getlist('in_country')) \
-                .filter(in_county__in = request.POST.getlist('in_county'))
+                .filter(in_county__in = request.POST.getlist('in_county')) \
+                .filter(date_seen__range = [from_date_selected, to_date_selected])
             # create an all_sightings varable which is filtered by the searched for data
 
-            print(all_sightings)
+            # print(all_sightings)
 
+            
+            for i in all_sightings:
+                sightings_per_month = 0
+                for j in all_sightings: 
+                    if i.date_seen.month == j.date_seen.month: 
+                        sightings_per_month +=1
+                
+                dict = {'species_name': i.species.name, 'frequency': sightings_per_month, 'month': i.date_seen.month}
+                name_exists = False
+                for name in list_for_line_graph: 
+                    if len(list_for_line_graph)!=0:
+                        if name["species_name"] == i.species.name and name["month"] == i.date_seen.month:
+                            name_exists = True
+                if name_exists == False:
+                    list_for_line_graph.append(dict)
+                
             for i in all_sightings: # looop over all the sightings 
                 occurrence = 0 #start counting ocurrence of each sighting at 0
                 for j in all_sightings: 
@@ -61,7 +81,10 @@ def displayData(request):
                 if name_exists == False: #if name does not exist in the dictionary 
                     list_dict.append(dict) #append the name as a key to the dict
 
-        print(list_dict)
+
+        # print(list_dict)
+        print("line graph data:")
+        print(list_for_line_graph)
 
         all_birds_sighted_json = json.dumps(list_dict) 
         context_dict['jsondata'] = all_birds_sighted_json
@@ -79,3 +102,19 @@ def load_counties(request):
     # print(counties)
     
     return JsonResponse(list(counties.values('in_country', 'name')), safe=False)
+
+
+#to export data from Sightings table: 
+def export(request):
+
+    response = HttpResponse(content_type = 'text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Species name', 'Country', 'County', 'Date seen', 'birder ID'])
+
+    for sighting in Sighting.objects.all().values_list('species__name', 'in_country__name', 'in_county', 'date_seen', 'birder'):
+        writer.writerow(sighting)
+    
+    #to tell the browser what to do with the response: 
+    response['Content-Disposition'] = 'attachment; filename="sightings.csv"'
+
+    return response

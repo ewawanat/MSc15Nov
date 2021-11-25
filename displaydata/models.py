@@ -1,13 +1,8 @@
 from django.db import models
-from django.db.models.base import Model
 from django.contrib.auth.models import User
 from django.db.models.deletion import PROTECT
-from django.db.models.fields.related import ForeignKey, ManyToManyField
-from django.forms.fields import MultipleChoiceField
 from enterdata.models import Country, County, Species
-from enterdata.views import enterdata
-from multiselectfield import MultiSelectField
-from multiselectfield import MultiSelectFormField
+
 
 
 class DisplayForm(models.Model):

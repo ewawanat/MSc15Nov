@@ -1,5 +1,4 @@
 body{
-    background-color: rgba(182, 215, 168, 100);
     color: darkblue;
 }
 
@@ -13,7 +12,7 @@ h1, h2, h3, h4, h5 {
 }
 
 header{
-    background-color: #20967e;
+    background-color: #7a92da;
     padding: 20px;
     position: relative;
     text-align: right;
@@ -29,6 +28,18 @@ header h1 {
     text-align:justify;
     margin-left: 20px;
 }
+
+.logout-link {
+    grid-template-columns: 1fr 1fr;
+}
+
+
+nav > #logo {
+    justify-self: left;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
 nav {
     justify-self: end;
     padding-right: 40px;
@@ -43,7 +54,7 @@ nav li {
 
 nav button{
     background-color: transparent;
-    color: white;
+    color: midnightblue;
     cursor: pointer;
     border: 0;
     font-size: 1em;
@@ -165,6 +176,7 @@ body {
     box-sizing: border-box;
     padding: 5px;
     border: 10px solid #efa588;
+    z-index: -1;
 }
 
 
@@ -175,6 +187,7 @@ body {
     width: 433px;
     height: 306px;
     left: 148px;
+    z-index: -1;
 }
 
 
@@ -186,6 +199,7 @@ body {
     width: 107px;
     transform: rotate(43deg);
     border-radius: 63% 0 0 40%;
+    z-index: -1;
 }
 
 .head .eye {
@@ -196,6 +210,7 @@ body {
     height: 9px;
     background: #3f2a27;
     border-radius: 50%;
+    z-index: -1;
 }
 
 .crest {
@@ -206,6 +221,7 @@ body {
     width: 74px;
     border-top-left-radius: 18px;
     overflow: hidden;
+    
 }
 
 .crest .crest-1,
