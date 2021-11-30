@@ -1,9 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 body{
     color: darkblue;
 }
 
 body *{
-    font-family: "Gill Sans", sans-serif;
+    font-family: "Roboto", sans-serif; 
 }
 
 h1, h2, h3, h4, h5 {
@@ -13,13 +17,12 @@ h1, h2, h3, h4, h5 {
 
 header{
     background-color: #7a92da;
-    padding: 20px;
+    padding: 20px 0;
     position: relative;
     text-align: right;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr, 1fr;
-    padding: 20px 0;
+    /* display: grid; */
+    /* grid-template-columns: 1fr, 1fr; */
     font-size: 30px;
 }
 
@@ -27,28 +30,28 @@ header h1 {
     display: inline-flex;
     text-align:justify;
     margin-left: 20px;
-}
 
-.logout-link {
-    grid-template-columns: 1fr 1fr;
-}
-
-
-nav > #logo {
-    justify-self: left;
-    padding-left: 40px;
-    padding-top: 20px;
 }
 
 nav {
+    height: 150px;
     justify-self: end;
     padding-right: 40px;
+}
+
+#logo {
+    justify-self: left;
+    display: inline-block;
+}
+
+.logout-link {
+    display: inline-block;
 }
 
 nav li {
     display: inline-flex;
     padding: 10px;
-    margin-left: 20px;
+    margin-left: 0px;
     margin-top: 0;
 }
 
@@ -66,8 +69,18 @@ nav button{
 
 .site-form {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 1fr;
+    align-items: left;
+}
+
+.fieldsinform {
+    grid-template-columns: 1fr, 1fr;
+
+}
+
+[id=id_in_country]
+{
+    width: 175px;
 }
 
 #loginpage {
@@ -99,9 +112,7 @@ a, a:hover, a:visited{
     text-decoration: none;
 }
 
-* {
-    box-sizing: border-box;
-}
+
 
 html {
     height: 100%;

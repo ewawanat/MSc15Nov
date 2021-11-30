@@ -15,7 +15,7 @@ class DisplayForm(models.Model):
     in_county = models.ManyToManyField(County)
     from_date = models.DateField()
     to_date = models.DateField()
-    birder = models.ForeignKey(User, on_delete=PROTECT, default=None)
+    user = models.ForeignKey(User, on_delete=PROTECT, default=None)
 
     def __str__(self): 
         return self.species_name  #function to return the name of the instance of DisplayForm

@@ -15,7 +15,7 @@ def enterdata(request):
         if form.is_valid():
             #save the data to the database:
             instance_of_data_entry = form.save(commit=False) #created an instance of an article but don't commit to saving it yet
-            instance_of_data_entry.birder = request.user # to associate the person who collected the data with the logged in user   
+            instance_of_data_entry.user = request.user # to associate the person who collected the data with the logged in user   
             instance_of_data_entry.save()
             #redirect to somewhere
             return redirect('enterdata:submitted')

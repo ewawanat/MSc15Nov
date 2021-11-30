@@ -9,24 +9,30 @@
     <link rel="stylesheet" href = "{% static 'kwakstyle.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <div id = "logo"><img src = "{% static 'bird_blue.png' %}" alt = "logo" width="110" height="110"></div>
-
+    <header>            
+        <nav width = 100%>
+        <div id = "logo" width = 100%>
+            <img src = "{% static 'bird_blue.png' %}" style = "position: absolute; left: 0;" alt = "logo" width="110" height="110">
             {% if user.is_authenticated %}
-                <form class = "logout-link" action = "{% url 'accounts:logout' %}" method = "post">
-                    {% csrf_token %} 
-                    <button type = "submit"> Log out </button>
-                </form>
+                    <form class = "logout-link" action = "{% url 'accounts:logout' %}" method = "post">
+                        {% csrf_token %} 
+                        <button type = "submit"> Log out </button>
+                    </form>
+                    {% endif %}
+        </div>
+        <div width = 100%>
+            {% if user.is_authenticated %}
                 <li><a href = "{% url 'enterdata:enterdata' %}"> Add some data! </a></li>
                 <li><a href = "{% url 'displaydata:displaydata' %}"> Show me some data! </a></li>
             {% else %}
                 <li><a href = "{% url 'accounts:login' %}">Login</a></li>
                 <li><a href = "{% url 'accounts:signup' %}">Sign up</a></li>
             {% endif %}
+        </div>
         </nav>
     </header>
-    
+    <footer>
+    </footer>
     {% block content %}
     {% endblock %}
     

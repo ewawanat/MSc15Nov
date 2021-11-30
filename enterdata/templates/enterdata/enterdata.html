@@ -7,11 +7,21 @@
  {% endfor %}
 -->
 <body>
- <h1> Hi {{ user.username }}! <div> You can enter your data here:</div> </h1>
+ <h1> Hi {{ user.username }}! <div> You can enter your data here:
+ 
+ </div> </h1>
    <h1>
    <form class = "site-form" id = "enterdataform" method ="post" data-counties-url = "{% url 'enterdata:ajax_load_counties' %}" enctype= "multipart/form-data">
       {% csrf_token %} <!--security measure token-->
-      {{form.as_p}}
+     {% for field in form %}
+         <div class = "fieldwrapper">
+            {{field.errors}}
+            {{field.label_tag }}
+             <p class = "fieldsinform">
+            {{field }}
+            </p>
+         </div>
+         {% endfor %}
       <input type = "submit" id ="submit-button" name="submit-button" value= "Submit my data" href="submitted.html"/>
    </form> 
    </h1>
