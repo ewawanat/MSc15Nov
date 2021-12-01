@@ -138,6 +138,11 @@ def create_bargraph(request):
 def create_linegraph(request):
 
     selected_species = request.POST.getlist('species[]')
+    print("REQUEST POST")
+    print(request.POST.getlist('species[]'))
+    print("AAAAAAAA selected species ")
+    print(selected_species)
+
     from_date_selected = request.POST['from_date']
     to_date_selected = request.POST['to_date']
     
@@ -172,6 +177,8 @@ def create_linegraph(request):
     for each_species in selected_species:  
         # list for each selected species
         result = Species.objects.get(id=each_species) # match the id with each of the species id
+        print(result)       
+    
         all_sightings = Sighting.objects.filter(species = result) \
             .filter(in_country__in = request.POST.getlist('country[]')) \
             .filter(in_county__in = request.POST.getlist('county[]')) \
@@ -195,22 +202,25 @@ def create_linegraph(request):
                     # print('name')
                     # print(name)
                     if len(name)!=0:
-                        print(name["species_name"], name["month"])
-                        print(i.species.name, i.date_seen.month)
+                        # print(name["species_name"], name["month"])
+                        # print(i.species.name, i.date_seen.month)
                         if name["species_name"] == i.species.name and name["month"] == i.date_seen.month:
-                            print("fount it!!! ")
+                            # print("fount it!!! ")
                             name_exists = True
                             single_species_list = [] 
 
             if name_exists == False:
                 single_species_list.append(dict)
-                print("single_species_list")
-                print(single_species_list) 
-            if single_species_list not in list_for_line_graph:
-                if len(single_species_list) !=0:
-                    list_for_line_graph.append(single_species_list)
+                # print("single_species_list")
+                # print(single_species_list) 
+        if single_species_list not in list_for_line_graph:
+            if len(single_species_list) !=0:
+                list_for_line_graph.append(single_species_list)
+                single_species_list = [] 
                 
-              
+        print(list_for_line_graph)
+        print(month_list)       
+
         species_name = result.name
         for month in month_list:
             # print(month)
@@ -223,15 +233,18 @@ def create_linegraph(request):
                 for species_sighted_per_month in species_element:
                     species_name_inside_element = species_sighted_per_month['species_name']
                     print('species_sighted_per_month')  
-                    print(species_sighted_per_month)                      
+                    print(species_sighted_per_month)
+                    print(species_sighted_per_month['month'])
+                    print(month)                      
                     if month == species_sighted_per_month['month'] and species_name == species_sighted_per_month['species_name']:
+                        print("FOUND ITTTTT")
                         month_exists = True
                 if month_exists == False and species_name == species_name_inside_element:        
                     dict = {'species_name': species_name, 'frequency': 0, 'month': month}
                     species_element.append(dict)
-                
+                    print(species_element)
 
-    print(list_for_line_graph)
+    # print(list_for_line_graph)
 
     data = {
         'line_graph_list': list_for_line_graph,
