@@ -35,6 +35,7 @@ class Sighting(models.Model):
     species = models.ForeignKey(Species, default=None, on_delete=PROTECT)
     date_seen = models.DateField(default=date.today)
     photo = models.ImageField(default ='default.png', blank = True)
+        # def __str__ self.
     in_country = models.ForeignKey(Country, default = None, on_delete = PROTECT)
     in_county = models.ForeignKey(County, default = None, on_delete = CASCADE)
     #sound_file = models.FileField(upload_to=/'sounds/')

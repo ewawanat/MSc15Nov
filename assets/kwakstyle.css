@@ -43,9 +43,23 @@ nav {
     justify-self: left;
     display: inline-block;
 }
+.welcome {
+    margin-bottom: 20px;
 
+}
 .logout-link {
     display: inline-block;
+}
+.display-data {
+    margin-top: 20px;
+}
+
+.thank-you {
+    margin-top: 20px;
+}
+
+.site-form {
+    margin-top: 20px;
 }
 
 nav li {

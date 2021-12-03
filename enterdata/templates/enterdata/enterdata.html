@@ -7,9 +7,13 @@
  {% endfor %}
 -->
 <body>
- <h1> Hi {{ user.username }}! <div> You can enter your data here:
- 
- </div> </h1>
+ <h1 class = "welcome"> Hi {{ user.username }}! 
+</h1>
+<div> <h1> You can enter your data here. <h1>
+</div> 
+<div>
+   Photo is optional.
+</div>
    <h1>
    <form class = "site-form" id = "enterdataform" method ="post" data-counties-url = "{% url 'enterdata:ajax_load_counties' %}" enctype= "multipart/form-data">
       {% csrf_token %} <!--security measure token-->
