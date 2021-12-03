@@ -146,7 +146,6 @@ def create_linegraph(request):
     from_date_selected = request.POST['from_date']
     to_date_selected = request.POST['to_date']
     
-    
     from_month_start = int(str.split(from_date_selected, '-')[1])
     from_month_end = int(str.split(to_date_selected, '-')[1])
 
@@ -158,15 +157,12 @@ def create_linegraph(request):
         month_list.append(from_month_start + month)
     
     # print(month_list)
-
     # month = request.POST['from_date']
     # print("AAAAAAAAAAAAAAAA")
     # print(from_month_start)
     # print(from_month_end)
-
     # print("request.POST here:")
     # print(request.POST)
-
     # print(selected_species)
     # print(from_date_selected)
     # print(to_date_selected)
@@ -195,19 +191,21 @@ def create_linegraph(request):
             # print('dict')
             # print(dict)
             name_exists = False 
-            for elements in list_for_line_graph: 
-                # print('elements')
-                # print(elements)
-                for name in elements:
-                    # print('name')
-                    # print(name)
-                    if len(name)!=0:
-                        # print(name["species_name"], name["month"])
-                        # print(i.species.name, i.date_seen.month)
-                        if name["species_name"] == i.species.name and name["month"] == i.date_seen.month:
-                            # print("fount it!!! ")
-                            name_exists = True
-                            single_species_list = [] 
+            for elements in single_species_list: 
+                print(single_species_list)
+                print('elements')
+                print(elements)
+                # for name in elements:
+                #     print('name')
+                #     print(name)
+                    
+                if len(elements)!=0:
+                    print(elements["species_name"], elements["month"])
+                    print(i.species.name, i.date_seen.month)
+                    if elements["species_name"] == i.species.name and elements["month"] == i.date_seen.month:
+                        print("fount it!!! ")
+                        name_exists = True
+                        # single_species_list = [] 
 
             if name_exists == False:
                 single_species_list.append(dict)
@@ -227,22 +225,22 @@ def create_linegraph(request):
             month_exists = False
             
             for species_element in list_for_line_graph: 
-                print('species_element')
-                print(species_element)
+                # print('species_element')
+                # print(species_element)
 
                 for species_sighted_per_month in species_element:
                     species_name_inside_element = species_sighted_per_month['species_name']
-                    print('species_sighted_per_month')  
-                    print(species_sighted_per_month)
-                    print(species_sighted_per_month['month'])
-                    print(month)                      
+                    # print('species_sighted_per_month')  
+                    # print(species_sighted_per_month)
+                    # print(species_sighted_per_month['month'])
+                    # print(month)                      
                     if month == species_sighted_per_month['month'] and species_name == species_sighted_per_month['species_name']:
-                        print("FOUND ITTTTT")
+                        # print("FOUND ITTTTT")
                         month_exists = True
                 if month_exists == False and species_name == species_name_inside_element:        
                     dict = {'species_name': species_name, 'frequency': 0, 'month': month}
                     species_element.append(dict)
-                    print(species_element)
+                    # print(species_element)
 
     # print(list_for_line_graph)
 

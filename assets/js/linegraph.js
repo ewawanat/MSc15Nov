@@ -20,14 +20,14 @@ $(document).ready(function() {
 
              const svg = d3.select('.canvas')
                 .append('svg')
-                .attr('width', graphWidth + 400 + margin.left + margin.right)
-                .attr('height', graphHeight + margin.top + margin.bottom)
+                  .attr('width', graphWidth + 400 + margin.left + margin.right)
+                  .attr('height', graphHeight + margin.top + margin.bottom);
 
              const graph = svg.append('g')
                 .attr('width', graphWidth)
                 .attr('height', graphHeight)
                 .attr('transform', `translate(${margin.left}, ${margin.top})`);
-            
+               
 
              const x = d3.scaleLinear().range([0, graphWidth]);
              const y = d3.scaleLinear().range([graphHeight, 0]);
@@ -38,6 +38,8 @@ $(document).ready(function() {
 
              const yAxisGroup = graph.append('g')
                 .attr('class', 'y-axis');
+
+
 
              const line = d3.line()
                 .x(function(d) {
@@ -69,6 +71,15 @@ $(document).ready(function() {
              
             const frequencySet = new Set() 
 
+            data.line_graph_list.forEach(d => {
+               d.forEach(index => {
+                  all_data.push(index);
+               });
+            });
+
+            x.domain(d3.extent(data.months, d => d));
+            y.domain([0, d3.max(all_data, d => d.frequency)]);   
+            
 
              data.line_graph_list.forEach(d => {
                 const path = graph.append('path');
@@ -76,16 +87,14 @@ $(document).ready(function() {
                    d.forEach(index => {
                       frequencySet.add(index.frequency);  
                       array_data.push(index);
-                      all_data.push(index);
                    });
-                array_data.sort((a,b) => a.month - b.month);
+ 
+               
+               array_data.sort((a,b) => a.month - b.month);
+                
                 console.log('array_data');
-         
                 console.log(array_data);
 
-                x.domain(d3.extent(data.months, d => d));
-                y.domain([0, d3.max(all_data, d => d.frequency)]);    
-                
                 path.data([array_data])
                    .attr("fill", 'none')
                    .attr("stroke", d => {
@@ -96,7 +105,7 @@ $(document).ready(function() {
                    .attr('d', line);
 
                 });
-                
+
                 const circles = graph.selectAll('circle')
                    .data(all_data);
 
@@ -189,7 +198,7 @@ $(document).ready(function() {
                         case 11:
                             return "November";
                             break;  
-                        default:                                                case 3:
+                        default:                              
                             return "December";
                         } 
                 });
@@ -197,7 +206,8 @@ $(document).ready(function() {
                 const yAxis = d3.axisLeft(y)
                    .ticks(frequencySet.size)
                    .tickFormat(d3.format("d"));
-                
+
+                console.log(frequencySet);
                 
                 xAxisGroup.call(xAxis);
                 yAxisGroup.call(yAxis);
@@ -214,7 +224,7 @@ $(document).ready(function() {
                    .attr('transform', function(d, i) {
                      return `translate(${graphWidth + 140}, ${40 + i * 30})`;
                    });
-                 
+
                 legend.append('rect')
                    .attr('width', 20)
                    .attr('height', 1)
@@ -225,8 +235,8 @@ $(document).ready(function() {
                    .attr('x', 25)
                    .attr('y', 5)
                    .text(d => d)
-                   .attr('fill', colour);        
+                   .attr('fill', colour);
             }
-       });
-    });
- });
+      });
+   });
+});
