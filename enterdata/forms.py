@@ -1,17 +1,16 @@
 from django import forms
 from django.forms.widgets import DateInput
 from . import models
-
+import datetime
+from django.core.validators import MaxValueValidator
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
 class EnterData(forms.ModelForm):
-    date_seen = forms.DateField(widget = DateInput)
+    date_seen = forms.DateField(widget = DateInput, validators = [MaxValueValidator(datetime.date.today)])
+
     class Meta:
         model = models.Sighting
-        fields = ['species', 'in_country', 'in_county', 'date_seen', 'photo']
+        fields = ['species', 'date_seen', 'photo', 'in_country', 'in_county' ]
 
-    def __init__(self, * args, **krwargs):
-        super().__init__(* args, **krwargs)
-        self.fields['in_county'].queryset = models.County.objects.none()

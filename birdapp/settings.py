@@ -42,12 +42,10 @@ INSTALLED_APPS = [
     'displaydata',
     'accounts',
     'birdapp',
-    'graphene_django',
+    'multiselectfield',
+    'django_extensions',
 ]
 
-GRAPHENE = {
-    'SCHEMA': 'birdapp.schema.schema',
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

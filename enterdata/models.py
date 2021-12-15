@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.base import Model
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE, PROTECT
 from datetime import date
@@ -36,13 +35,14 @@ class Sighting(models.Model):
     species = models.ForeignKey(Species, default=None, on_delete=PROTECT)
     date_seen = models.DateField(default=date.today)
     photo = models.ImageField(default ='default.png', blank = True)
+        # def __str__ self.
     in_country = models.ForeignKey(Country, default = None, on_delete = PROTECT)
-    in_county = models.ForeignKey(County, default = None, on_delete = PROTECT)
+    in_county = models.ForeignKey(County, default = None, on_delete = CASCADE)
     #sound_file = models.FileField(upload_to=/'sounds/')
     #class Meta:
     # db_table='Audio_store'
     #maybe later add user 
-    birder = models.ForeignKey(User, default = None, on_delete = PROTECT)
+    user = models.ForeignKey(User, default = None, on_delete = PROTECT)
 
     def __str__(self): 
-        return self.species.name + " "  #function to return the name of the instance of Species
+        return self.species.name  #function to return the name of the instance of Species

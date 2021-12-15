@@ -12,7 +12,6 @@ urlpatterns = [
     path('displaydata/', include('displaydata.urls')),
     path('', views.homePage),
     path('index/', views.homePage, name = 'homepage'),
- #   path('graphql/', GraphQLView.as_view(graphiql = True)),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

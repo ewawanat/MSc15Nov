@@ -19,5 +19,5 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(Sighting)
 class SightingAdmin(admin.ModelAdmin):
-    list_display = ('species', 'id')
+    list_display = ('species', 'id', 'in_country', 'in_county')
     ordering = ('id',)

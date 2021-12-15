@@ -2,11 +2,14 @@
 
 {% block content %}
  <h1 class = "submitted" action = "{% url 'enterdata:submitted' %}" method ="post" >
-Thanks for submitting some data!
+Thanks for submitting some data, {{ user.username }}!
 </h1>
 <h1>
-<a href="#"> Show me some data! </a>
-<a href="#"> Submit more data! </a>
-
+<div class = "thank-you"> 
+<a href="{% url 'displaydata:displaydata' %}"> Show me some data! </a>
+</div>
+<div class = "thank-you"> 
+<a href="{% url 'enterdata:enterdata' %}"> Submit more data! </a>
+</div>
 </h1>
 {% endblock %}
